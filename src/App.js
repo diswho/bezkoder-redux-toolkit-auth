@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css';
 
-import { logout } from "./app/slices/auth";
 import Home from "./app/components/Resources/Home";
 import BoardUser from "./app/components/Resources/BoardUser";
 import BoardModerator from "./app/components/Resources/BoardModerator";
@@ -15,6 +14,8 @@ import Register from "./app/components/auths/Register";
 import Profile from "./app/components/auths/Profile";
 import Login from "./app/components/auths/Login";
 
+import { logout } from "./app/slices/auth";
+// import EventBus from "./app/common/EventBus";
 
 function App() {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -29,8 +30,10 @@ function App() {
 
   useEffect(() => {
     if (currentUser) {
-      setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+      // setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+      setShowModeratorBoard(currentUser.is_active);
+      setShowAdminBoard(currentUser.is_superuser);
     } else {
       setShowModeratorBoard(false);
       setShowAdminBoard(false);
@@ -39,7 +42,7 @@ function App() {
   return (
     <Router>
       <div>
-        <nav className='navbar navbar-expand navbar-dark bg-dark'>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
             bezKoder
           </Link>
@@ -49,6 +52,7 @@ function App() {
                 Home
               </Link>
             </li>
+
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
@@ -73,6 +77,7 @@ function App() {
               </li>
             )}
           </div>
+
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
@@ -102,8 +107,9 @@ function App() {
             </div>
           )}
         </nav>
+
         <div className="container mt-3">
-        <Routes>
+          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />

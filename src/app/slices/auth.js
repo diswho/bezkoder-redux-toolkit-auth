@@ -3,26 +3,8 @@ import { setMessage } from "./message";
 
 import AuthService from "../services/auth.service";
 
+// const user = AuthService.getCurrentUser;
 const user = JSON.parse(localStorage.getItem("user"));
-
-export const login = createAsyncThunk(
-    "auth/login",
-    async ({ username, password }, thunkAPI) => {
-        try {
-            const data = await AuthService.login(username, password);
-            return { user: data };
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            thunkAPI.dispatch(setMessage(message));
-            return thunkAPI.rejectWithValue();
-        }
-    }
-);
 
 export const register = createAsyncThunk(
     "auth/register",
@@ -44,6 +26,24 @@ export const register = createAsyncThunk(
     }
 );
 
+export const login = createAsyncThunk(
+    "auth/login",
+    async ({ username, password }, thunkAPI) => {
+        try {
+            const data = await AuthService.login(username, password);
+            return { user: data };
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        }
+    }
+);
 
 export const logout = createAsyncThunk("auth/logout", async () => {
     await AuthService.logout();

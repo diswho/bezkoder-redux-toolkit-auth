@@ -2,7 +2,7 @@
 [URL](https://www.bezkoder.com/redux-toolkit-auth/)
 
 [Github](https://github.com/bezkoder/redux-toolkit-authentication)
-## Setup React.js Project
+### Setup React.js Project
 ```sh
 npx create-react-app redux-toolkit-auth --template redux
 ```
@@ -10,7 +10,7 @@ npx create-react-app redux-toolkit-auth --template redux
 ```sh
 npm install react-router-dom
 ```
-## Install react-redux and redux-toolkit
+### Install react-redux and redux-toolkit
 ```sh
 npm install react-redux @reduxjs/toolkit
 ```
@@ -30,8 +30,19 @@ npm install formik yup
 ```sh
 npm install http-proxy-middleware
 ```
-
+### Run
 ```sh
+npm start
+```
+## Backend System
+```sh
+C:\Users\vieng\Documents\Workspaces\xokthavy\backend
+```
+```sh
+venv\Scripts\activate
+```
+```sh
+uvicorn app.main:app --reload
 ```
 ```sh
 ```

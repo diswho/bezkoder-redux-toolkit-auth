@@ -1,19 +1,18 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/auth/";
+const API_URL = "http://localhost:8000";
 
 
 const login = (username, password) => {
+    const params = new URLSearchParams();
+    params.append("username", username);
+    params.append("password", password);
     return axios
-        .post(API_URL + "signin", {
-            username,
-            password,
-        })
+        .post(API_URL + "/api/v1/login/access-token",params)
         .then((response) => {
-            if (response.data.username) {
+            if (response.data.full_name) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
-
             return response.data;
         });
 };
@@ -37,8 +36,8 @@ const getCurrentUser = () => {
 };
 
 const AuthService = {
-    register,
     login,
+    register,
     logout,
     getCurrentUser,
 }

@@ -16,7 +16,7 @@ const Home = () => {
           error.message ||
           error.toString();
 
-        setContent(_content);
+        setContent(_content.detail);
       }
     );
   }, []);

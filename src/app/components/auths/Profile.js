@@ -9,6 +9,7 @@ const Profile = () => {
     return <Navigate to="/login" />;
   }
 
+
   return (
     <div className="container">
       <header className="jumbotron">
@@ -17,16 +18,16 @@ const Profile = () => {
         </h3>
       </header>
       <p>
-        <strong>Id:</strong> {currentUser.id}
+        <strong>Id:</strong> {currentUser.user_id}
       </p>
       <p>
         <strong>Email:</strong> {currentUser.email}
       </p>
       <strong>Authorities:</strong>
-      <ul>
+      {/* <ul>
         {currentUser.roles &&
           currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-      </ul>
+      </ul> */}
     </div>
   );
 };
